@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Priyank - My Games Portal</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Specific styles for the Contact Form and Social Links */
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: var(--color-card-bg);
+            border-radius: 10px;
+            border: 1px solid var(--color-border-glow);
+        }
+
+        .contact-container h2 {
+            color: var(--color-accent-neon);
+            border-bottom: 2px solid var(--color-border-glow);
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+
+        /* Form Styling */
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #4a4a60;
+            border-radius: 5px;
+            background-color: #2a2a40;
+            color: var(--color-text-light);
+            font-size: 1em;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        /* Use the existing play-btn class for the submit button */
+        .contact-form button.play-btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1em;
+        }
+
+        /* Social Links */
+        .social-links {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px dashed var(--color-border-glow);
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin: 0 15px;
+            font-size: 1.2em;
+            color: var(--color-text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--color-accent-neon);
+            text-shadow: 0 0 8px var(--color-accent-neon);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <h1>🎮 My Games Portal</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About Me</a>
+            <a href="contact.html" class="active">Contact</a>
+        </nav>
+    </header>
+
+    <main class="portal-container">
+        <section class="contact-container">
+            <h2>Reach Out to Priyank Solanki</h2>
+            <p style="margin-bottom: 30px;">
+                I would love to hear your feedback on the games, suggestions for future projects, or any bug reports. Use the form below or connect with me directly via social media!
+            </p>
+
+            <form class="contact-form" action="MAILTO:your-email@example.com" method="post" enctype="text/plain">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" value="Feedback on [Game Name]">
+
+                <label for="message">Message / Feedback</label>
+                <textarea id="message" name="message" required></textarea>
+
+                <button type="submit" class="play-btn">Send Message</button>
+            </form>
+
+            <div class="social-links">
+                <p>--- Connect Directly ---</p>
+                <a href="https://itch.io/priyank-solanki" target="_blank" title="My itch.io Profile">
+                    Itch.io
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        &copy; 2025 My Games Portal. All Rights Reserved. | Made by PRIYANK SOLANKI
+    </footer>
+
+</body>
+</html>

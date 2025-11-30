@@ -1,0 +1,253 @@
+/* Basic Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    /* --- STEAM THEME DEFINITION --- */
+    --color-dark: #1b2838; /* Steam Dark Slate Gray background */
+    --color-accent-blue: #66c0f4; /* Primary Accent: Steam Light Blue/Teal */
+    --color-text-light: #c7d5e0; /* Off-white/light gray text for readability */
+    --color-card-bg: #2a475e; /* Slightly lighter dark blue for card backgrounds */
+    --color-border-subtle: #4a687d; /* Subtle divider/border color */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--color-dark);
+    color: var(--color-text-light);
+    line-height: 1.6;
+}
+
+/* Header & Navigation */
+.main-header {
+    background: var(--color-card-bg);
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Blue/Teal border accent */
+    border-bottom: 2px solid var(--color-accent-blue); 
+}
+
+/* --- LOGO AND TITLE PLACEMENT (Top-Left) --- */
+.header-left-content {
+    display: flex; 
+    align-items: center; 
+    gap: 15px; 
+}
+
+.header-logo-left {
+    height: 40px; 
+    width: auto; 
+}
+
+.main-header h1 {
+    /* Title is Steam Blue/Teal */
+    color: var(--color-accent-blue); 
+    /* Soft blue shadow */
+    text-shadow: 0 0 5px rgba(102, 192, 244, 0.7); 
+    margin: 0; 
+}
+/* --- END LOGO/TITLE --- */
+
+.main-header nav a {
+    color: var(--color-text-light);
+    text-decoration: none;
+    margin-left: 20px;
+    padding: 5px 10px;
+    transition: color 0.3s, border-bottom 0.3s;
+}
+
+.main-header nav a:hover,
+.main-header nav a.active {
+    /* Hover/active links are Steam Blue/Teal */
+    color: var(--color-accent-blue); 
+    /* Blue bottom border on hover/active */
+    border-bottom: 2px solid var(--color-accent-blue); 
+}
+
+/* Main Content & Hero */
+.portal-container {
+    padding: 20px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hero-section {
+    text-align: center;
+    padding: 40px 0;
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    /* Subtle border */
+    border-bottom: 1px dashed var(--color-border-subtle); 
+}
+
+/* Filter Bar */
+.filter-bar {
+    margin-bottom: 20px;
+}
+
+.filter-bar label, .filter-bar select {
+    font-size: 1em;
+    color: var(--color-text-light);
+}
+
+.filter-bar select {
+    background: var(--color-card-bg);
+    /* Subtle border */
+    border: 1px solid var(--color-border-subtle); 
+    padding: 8px;
+    border-radius: 5px;
+}
+
+/* Game Showcase Grid */
+.game-showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.game-card {
+    background-color: var(--color-card-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    padding-bottom: 15px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-decoration: none;
+    color: inherit;
+    display: block; 
+}
+
+/* Hover Effect */
+.game-card:hover {
+    transform: translateY(-5px) scale(1.01); /* Reduced lift for professional look */
+    /* Subtle blue box shadow on hover */
+    box-shadow: 0 5px 15px rgba(102, 192, 244, 0.3); 
+}
+
+.card-image {
+    height: 180px;
+    background-color: #333; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.card-title {
+    /* Card title is Steam Blue/Teal */
+    color: var(--color-accent-blue); 
+    margin-bottom: 5px;
+}
+
+.card-genre {
+    display: block;
+    color: #aaa;
+    font-size: 0.9em;
+    margin-bottom: 15px;
+}
+
+.play-btn {
+    /* Button base color matches background for a modern flat look */
+    background-color: var(--color-border-subtle); 
+    color: var(--color-text-light);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s, transform 0.1s;
+}
+
+.play-btn:hover {
+    /* Button highlights to Steam Blue/Teal on hover */
+    background-color: var(--color-accent-blue); 
+    color: var(--color-dark); /* Dark text on bright button */
+    transform: scale(1.05);
+}
+
+/* Footer */
+.main-footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+    background: var(--color-card-bg);
+    /* Subtle footer border */
+    border-top: 1px solid var(--color-border-subtle); 
+    font-size: 0.85em;
+    color: #888;
+}
+
+/* ---------------------------------- */
+/* Game Page Styles (for game-template.html) */
+/* ---------------------------------- */
+
+.game-page-container {
+    padding: 20px 5%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.game-display {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.game-frame {
+    width: 100%;
+    height: 600px; 
+    background: black;
+    /* Blue/Teal border and shadow */
+    border: 5px solid var(--color-accent-blue); 
+    box-shadow: 0 0 15px rgba(102, 192, 244, 0.7); 
+    margin: 20px 0;
+}
+
+.game-info {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.game-details, .game-controls {
+    flex: 1;
+    background: var(--color-card-bg);
+    padding: 20px;
+    border-radius: 8px;
+    /* Subtle border */
+    border: 1px solid var(--color-border-subtle); 
+}
+
+.game-details h2, .game-controls h2 {
+    /* Blue/Teal headings */
+    color: var(--color-accent-blue); 
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--color-border-subtle);
+    padding-bottom: 5px;
+}
+
+.game-controls ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.game-controls ul li {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px;
+    margin-bottom: 5px;
+    /* Blue/Teal vertical accent line */
+    border-left: 3px solid var(--color-accent-blue); 
+}
+
+/* Ensure the images inside the card fill the dedicated area */
+.card-image img {
+    width: 100%;       
+    height: 100%;      
+    object-fit: cover; 
+    display: block;    
+}

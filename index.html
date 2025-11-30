@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Games Portal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="main-header">
+    <h1>🎮 My Gaming Portal</h1>
+    
+    <nav>
+        <a href="index.html" class="active">
+            Home
+        </a>
+        
+        <a href="about.html">
+            About Me
+        </a>
+        
+        <a href="contact.html">
+            Contact
+        </a>
+    </nav>
+</header>
+
+    <main class="portal-container">
+        <section class="hero-section">
+            <p>Handcrafted Games by PRIYANK SOLANKI. Dive into a world of fun!</p>
+        </section>
+
+        <div class="filter-bar"> 
+            <label for="genre-select">Filter by Genre:</label>
+            <select id="genre-select">
+                <option value="all">All Games</option>
+                <option value="platformer">Platformer</option>
+                <option value="puzzle">Endless runner</option>
+                <option value="rpg">RPG</option>    
+            </select>
+        </div>
+
+        <section class="game-showcase-grid" id="game-grid">
+            
+            <a href="https://priyank-solanki.itch.io/rocket-boost" class="game-card" data-genre="platformer">
+                <div class="card-image">
+                    <img src="Images/Screenshot 2025-05-10 235249.png" alt="Screenshot of the Rocket Boost game in action.">
+                </div>
+                <h3 class="card-title">Sharp-Shooter</h3>
+                <span class="card-genre">Platformer</span>
+                <button class="play-btn">Play Now</button>
+            </a>
+            
+            <a href="https://priyank-solanki.itch.io/escape" class="game-card" data-genre="puzzle">
+                <div class="card-image">
+                    <img src="Images/Escape.png" alt="Screenshot of the Escape game in action.">
+                </div>
+                <h3 class="card-title">Escape</h3>
+                <span class="card-genre">Endless runner</span>
+                <button class="play-btn">Play Now</button>
+            </a>
+            
+            <a href="https://priyank-solanki.itch.io/mythical-dungeons" class="game-card" data-genre="rpg">
+                <div class="card-image">
+                    <img src="Images/Dungeon.png" alt="Screenshot of the Mythical Dungeon game in action.">
+                </div>
+                <h3 class="card-title">Mythical Dungeon</h3>
+                <span class="card-genre">RPG</span>
+                <button class="play-btn">Play Now</button>
+            </a>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        &copy; 2025 My Games Portal. All Rights Reserved. | Made by Priyank Solanki
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+/* Basic Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --color-dark: #12121c;
+    --color-accent-neon: #00ffff; /* Cyan */
+    --color-text-light: #f0f0f0;
+    --color-card-bg: #1e1e2d;
+    --color-border-glow: #00bfff; /* Deep Sky Blue */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--color-dark);
+    color: var(--color-text-light);
+    line-height: 1.6;
+}
+
+/* Header & Navigation */
+.main-header {
+    background: var(--color-card-bg);
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--color-accent-neon);
+}
+
+.main-header h1 {
+    color: var(--color-accent-neon);
+    text-shadow: 0 0 5px var(--color-accent-neon);
+}
+
+.main-header nav a {
+    color: var(--color-text-light);
+    text-decoration: none;
+    margin-left: 20px;
+    padding: 5px 10px;
+    transition: color 0.3s, border-bottom 0.3s;
+}
+
+.main-header nav a:hover,
+.main-header nav a.active {
+    color: var(--color-accent-neon);
+    border-bottom: 2px solid var(--color-accent-neon);
+}
+
+/* Main Content & Hero */
+.portal-container {
+    padding: 20px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hero-section {
+    text-align: center;
+    padding: 40px 0;
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    border-bottom: 1px dashed var(--color-border-glow);
+}
+
+/* Filter Bar */
+.filter-bar {
+    margin-bottom: 20px;
+}
+
+.filter-bar label, .filter-bar select {
+    font-size: 1em;
+    color: var(--color-text-light);
+}
+
+.filter-bar select {
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-accent-neon);
+    padding: 8px;
+    border-radius: 5px;
+}
+
+/* Game Showcase Grid */
+.game-showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.game-card {
+    background-color: var(--color-card-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    padding-bottom: 15px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-decoration: none;
+    color: inherit;
+    display: block; /* Make the whole card clickable */
+}
+
+/* Hover Effect */
+.game-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(0, 255, 255, 0.5); /* Neon glow */
+}
+
+.card-image {
+    height: 180px;
+    background-color: #333; /* Placeholder color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.card-title {
+    color: var(--color-accent-neon);
+    margin-bottom: 5px;
+}
+
+.card-genre {
+    display: block;
+    color: #aaa;
+    font-size: 0.9em;
+    margin-bottom: 15px;
+}
+
+.play-btn {
+    background-color: var(--color-accent-neon);
+    color: var(--color-dark);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.play-btn:hover {
+    background-color: #00e5e5;
+    transform: scale(1.05);
+}
+
+/* Footer */
+.main-footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+    background: var(--color-card-bg);
+    border-top: 1px solid var(--color-border-glow);
+    font-size: 0.85em;
+    color: #888;
+}
+
+/* ---------------------------------- */
+/* Game Page Styles (for game-template.html) */
+/* ---------------------------------- */
+
+.game-page-container {
+    padding: 20px 5%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.game-display {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.game-frame {
+    width: 100%;
+    height: 600px; /* Adjust based on your game size */
+    background: black;
+    border: 5px solid var(--color-accent-neon);
+    box-shadow: 0 0 15px var(--color-accent-neon);
+    margin: 20px 0;
+}
+
+.game-info {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.game-details, .game-controls {
+    flex: 1;
+    background: var(--color-card-bg);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border-glow);
+}
+
+.game-details h2, .game-controls h2 {
+    color: var(--color-accent-neon);
+    margin-bottom: 15px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+}
+
+.game-controls ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.game-controls ul li {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px;
+    margin-bottom: 5px;
+    border-left: 3px solid var(--color-accent-neon);
+}

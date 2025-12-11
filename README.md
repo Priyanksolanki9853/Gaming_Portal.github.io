@@ -2,7 +2,7 @@ WEBSITE LINK - https://priyanksolanki9853.github.io/Gaming_Portal.github.io/#
 
 # 🎮 Immersive Gaming Portal Portfolio
 
-![Project Banner](Screenshot 2025-12-12 021839)
+(Screenshot 2025-12-12 021839)
 > A high-performance, cyberpunk-themed Single Page Application (SPA) showcasing game development projects. Features a persistent state system, integrated arcade games, and a cloud-based global leaderboard.
 
 <div align="center">

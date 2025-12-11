@@ -21,8 +21,8 @@
             /* Deep Space Background */
             --bg-dark: #0b0b10;
             
-            /* UPDATED: More transparent gradient so particles show through */
-            --bg-gradient: radial-gradient(circle at top center, rgba(27, 40, 56, 0.4) 0%, rgba(11, 11, 16, 0.6) 80%);
+            /* Background Gradient - Made lighter so particles show through */
+            --bg-gradient: radial-gradient(circle at top center, rgba(27, 40, 56, 0.4) 0%, rgba(11, 11, 16, 0.9) 100%);
             
             /* Glassmorphism Cards */
             --bg-card: rgba(30, 30, 45, 0.6);
@@ -93,7 +93,7 @@
         #bg-particles {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* FIXED: Layer 1 - Above body background, below content */
+            /* FIXED: Layer 1 puts particles ON TOP of the black background, but BEHIND content */
             z-index: 1; 
             pointer-events: none;
         }
@@ -104,10 +104,10 @@
             top: 0; left: 0;
             width: 50px; height: 50px;
             border: 2px dashed var(--accent-primary);
-            background-color: rgba(0, 243, 255, 0.1); /* Slight fill for visibility */
+            background-color: rgba(0, 0, 0, 0.3); /* Slight darkness to see it better */
             border-radius: 50%;
-            pointer-events: none; /* Critical: Allows clicking through */
-            z-index: 9999; /* Top layer */
+            pointer-events: none; /* KEY FIX: Allows mouse to click through to the game */
+            z-index: 99999; /* Highest Z-Index to sit on top of everything */
             display: none;
             transform-origin: center;
             box-shadow: 0 0 15px var(--accent-glow);
@@ -136,7 +136,7 @@
             font-family: var(--font-code);
             color: var(--accent-primary);
             font-size: 1.2rem;
-            pointer-events: none; /* Let clicks pass through if stuck */
+            pointer-events: none; 
         }
         
         .boot-text-line {
@@ -975,13 +975,19 @@
 
     <script>
         // --- AUDIO ENGINE ---
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        // FIXED: Wrap in try-catch to prevent crash on older browsers/live environments
+        let audioCtx;
+        try {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        } catch (e) {
+            console.warn("AudioContext not supported");
+        }
         let isMuted = false;
 
         function playSound(type) {
-            if (isMuted || audioCtx.state === 'suspended') {
-                audioCtx.resume();
-                if(isMuted) return;
+            if (!audioCtx || isMuted || audioCtx.state === 'suspended') {
+                if(audioCtx) audioCtx.resume();
+                if(isMuted || !audioCtx) return;
             }
             
             const osc = audioCtx.createOscillator();
@@ -1040,7 +1046,10 @@
 
             function animate() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--accent-primary').trim();
+                // FIXED: Fallback color if CSS variable isn't ready
+                let color = getComputedStyle(document.documentElement).getPropertyValue('--accent-primary').trim();
+                if (!color) color = '#00f3ff';
+                ctx.fillStyle = color;
                 
                 particles.forEach((p, index) => {
                     p.x += p.vx;
@@ -1057,7 +1066,7 @@
                         if (index !== index2) {
                             let dist = Math.hypot(p.x - p2.x, p.y - p2.y);
                             if (dist < 150) {
-                                ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--accent-glow').trim();
+                                ctx.strokeStyle = color + '80'; // Add transparency
                                 ctx.lineWidth = 0.2;
                                 ctx.beginPath();
                                 ctx.moveTo(p.x, p.y);
@@ -1129,7 +1138,6 @@
                 document.querySelectorAll('.main-nav a').forEach(link => link.classList.remove('active'));
                 document.getElementById('nav-' + sectionId).classList.add('active');
                 
-                // FEATURE: Dynamic Tab Titles
                 const titles = {
                     'home': 'Home',
                     'about': 'About Me',
@@ -1138,7 +1146,6 @@
                     'contact': 'Contact'
                 };
                 document.title = `Priyank Solanki | ${titles[sectionId]}`;
-                
                 window.scrollTo(0, 0);
             },
 
@@ -1196,7 +1203,7 @@
             },
 
             init: () => {
-                // Boot Sequence - Always run logic for demo purposes now
+                // Boot Sequence
                 const bootScreen = document.getElementById('boot-screen');
                 const lines = ["INITIALIZING CORE...", "LOADING ASSETS...", "ACCESS GRANTED."];
                 let delay = 0;
@@ -1218,6 +1225,7 @@
 
                 app.loadSettings();
                 app.initFilter();
+                // FIXED: Init particles here, guaranteed to run
                 initParticles();
 
                 // 3D Tilt & FIXED 360 Rotation Logic
@@ -1227,7 +1235,7 @@
                 cards.forEach(card => {
                     const cardImg = card.querySelector('.card-image');
 
-                    // Existing 3D Tilt on Card
+                    // Existing 3D Tilt
                     card.addEventListener('mousemove', (e) => {
                         if(window.innerWidth < 768) return; 
                         const rect = card.getBoundingClientRect();
@@ -1242,11 +1250,10 @@
                     
                     card.addEventListener('mouseenter', () => playSound('hover'));
 
-                    // FIXED: 360 Rotation Icon on Image Hover
+                    // FIXED: 360 Rotation Icon Logic
                     if (cardImg) {
                         cardImg.addEventListener('mouseenter', () => {
                             rotateCursor.style.display = 'block';
-                            // Slightly bigger on hover
                             setTimeout(() => {
                                 rotateCursor.style.width = '60px';
                                 rotateCursor.style.height = '60px';
@@ -1260,12 +1267,8 @@
                         });
 
                         cardImg.addEventListener('mousemove', (e) => {
-                            // Position the icon at mouse cursor
-                            rotateCursor.style.left = (e.clientX - 30) + 'px'; // Center offset
+                            rotateCursor.style.left = (e.clientX - 30) + 'px'; 
                             rotateCursor.style.top = (e.clientY - 30) + 'px';
-                            
-                            // 360 Degree Rotation based on X position
-                            // Map screen X to rotation to create continuous rotation effect
                             const rotation = e.clientX; 
                             rotateCursor.style.transform = `rotate(${rotation}deg)`;
                         });
@@ -1321,15 +1324,21 @@
 const SUPABASE_URL = 'https://zkqvefcuiltkilxlvqbb.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InprcXZlZmN1aWx0a2lseGx2cWJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0NzE0NTUsImV4cCI6MjA4MTA0NzQ1NX0.0x6sBQrqMkvW2gJvdov6pDJcV3wJvKk4qngaMeBA83s';
 
-// FIXED: Added check to prevent crash if Supabase fails to load
+// FIXED: Wrap in Try-Catch so the whole site doesn't crash if database fails
 let _supabase = null;
-if (window.supabase) {
-    _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+try {
+    if (window.supabase) {
+        _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    } else {
+        console.warn("Supabase script not loaded yet.");
+    }
+} catch (err) {
+    console.error("Supabase init failed:", err);
 }
 
 // Function to fetch and display scores
 async function updateLeaderboard() {
-    if(!_supabase) return; // Prevent crash if Supabase not loaded
+    if(!_supabase) return; // Fail silently if no DB
 
     const list = document.getElementById('leaderboard-list');
     
@@ -1361,7 +1370,7 @@ async function updateLeaderboard() {
 }
 
 // Load scores when page opens
-updateLeaderboard();
+if(_supabase) updateLeaderboard();
 
 // --- SNAKE GAME LOGIC (Updated for Cloud) ---
 let snakeGameInterval;

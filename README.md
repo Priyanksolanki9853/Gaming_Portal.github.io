@@ -2,7 +2,8 @@ WEBSITE LINK - https://priyanksolanki9853.github.io/Gaming_Portal.github.io/#
 
 # 🎮 Immersive Gaming Portal Portfolio
 
-![Project Banner](https://placehold.co/1000x300/0b0b10/00f3ff?text=Gaming+Portal+Preview)
+![Project Banner](<img width="1915" height="1064" alt="image" src="https://github.com/user-attachments/assets/71f56d5d-497a-4596-8521-eab5d05ed8bb" />
+)
 > A high-performance, cyberpunk-themed Single Page Application (SPA) showcasing game development projects. Features a persistent state system, integrated arcade games, and a cloud-based global leaderboard.
 
 <div align="center">
@@ -12,7 +13,7 @@ WEBSITE LINK - https://priyanksolanki9853.github.io/Gaming_Portal.github.io/#
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
 
-[**🔴 LIVE DEMO**](https://your-username.github.io/your-repo-name/)
+[**🔴 LIVE DEMO**](https://priyanksolanki9853.github.io/Gaming_Portal.github.io/#)
 </div>
 
 ---

@@ -22,7 +22,7 @@
             --bg-dark: #0b0b10;
             
             /* UPDATED: More transparent gradient so particles show through */
-            --bg-gradient: radial-gradient(circle at top center, rgba(27, 40, 56, 0.4) 0%, rgba(11, 11, 16, 0.8) 80%);
+            --bg-gradient: radial-gradient(circle at top center, rgba(27, 40, 56, 0.4) 0%, rgba(11, 11, 16, 0.6) 80%);
             
             /* Glassmorphism Cards */
             --bg-card: rgba(30, 30, 45, 0.6);
@@ -93,21 +93,21 @@
         #bg-particles {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* FIXED: Changed from -1 to 0 so it sits on top of body bg, but below content */
-            z-index: 0; 
+            /* FIXED: Layer 1 - Above body background, below content */
+            z-index: 1; 
             pointer-events: none;
         }
 
         /* --- FEATURE: ROTATION CURSOR ICON --- */
-        /* FIXED: Added style for the rotating icon */
         #rotation-cursor {
             position: fixed;
             top: 0; left: 0;
             width: 50px; height: 50px;
             border: 2px dashed var(--accent-primary);
+            background-color: rgba(0, 243, 255, 0.1); /* Slight fill for visibility */
             border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
+            pointer-events: none; /* Critical: Allows clicking through */
+            z-index: 9999; /* Top layer */
             display: none;
             transform-origin: center;
             box-shadow: 0 0 15px var(--accent-glow);
@@ -117,7 +117,7 @@
             content: '';
             position: absolute;
             top: 50%; left: 50%;
-            width: 6px; height: 6px;
+            width: 8px; height: 8px;
             background: var(--accent-secondary);
             border-radius: 50%;
             transform: translate(-50%, -50%);
@@ -128,7 +128,7 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: #000;
-            z-index: 9999;
+            z-index: 10000;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -186,7 +186,7 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            z-index: 2000;
+            z-index: 10001;
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -324,9 +324,9 @@
             margin: 0 auto;
             padding: 40px 20px;
             min-height: 80vh;
-            /* FIXED: Ensure content sits above particles */
+            /* FIXED: Layer 5 - Content sits above particles (Layer 1) */
             position: relative;
-            z-index: 2;
+            z-index: 5;
         }
 
         /* Animation */
@@ -484,6 +484,8 @@
             width: 100%;
             height: 50%;
             background: linear-gradient(to top, var(--bg-card) 0%, transparent 100%);
+            /* FIXED: Ensure mouse events pass through the gradient to the image for hover detection */
+            pointer-events: none;
         }
 
         .card-content {
@@ -712,7 +714,7 @@
             background: rgba(0,0,0,0.5);
             /* FIXED: Ensure footer is above particles */
             position: relative;
-            z-index: 2;
+            z-index: 5;
         }
 
         .social-links-footer {
@@ -1263,7 +1265,7 @@
                             rotateCursor.style.top = (e.clientY - 30) + 'px';
                             
                             // 360 Degree Rotation based on X position
-                            // Map screen X to rotation
+                            // Map screen X to rotation to create continuous rotation effect
                             const rotation = e.clientX; 
                             rotateCursor.style.transform = `rotate(${rotation}deg)`;
                         });
@@ -1319,10 +1321,16 @@
 const SUPABASE_URL = 'https://zkqvefcuiltkilxlvqbb.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InprcXZlZmN1aWx0a2lseGx2cWJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0NzE0NTUsImV4cCI6MjA4MTA0NzQ1NX0.0x6sBQrqMkvW2gJvdov6pDJcV3wJvKk4qngaMeBA83s';
 
-const _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+// FIXED: Added check to prevent crash if Supabase fails to load
+let _supabase = null;
+if (window.supabase) {
+    _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+}
 
 // Function to fetch and display scores
 async function updateLeaderboard() {
+    if(!_supabase) return; // Prevent crash if Supabase not loaded
+
     const list = document.getElementById('leaderboard-list');
     
     // Get top 10 scores, ordered by score descending
@@ -1406,7 +1414,7 @@ function startSnakeGame() {
             setTimeout(async () => {
                 let playerName = prompt(`GAME OVER! Score: ${score}\nEnter your name for the Global Leaderboard:`);
                 
-                if (playerName && playerName.trim() !== "") {
+                if (playerName && playerName.trim() !== "" && _supabase) {
                     // Send to Supabase
                     const { error } = await _supabase
                         .from('scores')
